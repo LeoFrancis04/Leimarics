@@ -1,0 +1,37 @@
+// backend/prisma/schema.prisma
+
+
+generator client {
+  provider = "prisma-client"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model ContactSubmission {
+  id          String   @id @default(uuid())
+  name        String
+  email       String
+  phone       String
+  projectType String   @map("project_type")
+  message     String   @db.Text
+  status      String   @default("new")
+  createdAt   DateTime @default(now()) @map("created_at")
+  updatedAt   DateTime @updatedAt @map("updated_at")
+
+  @@index([createdAt(sort: Desc)])
+  @@index([status])
+  @@map("contact_submissions")
+}
+
+model NewsletterSubscriber {
+  id           String   @id @default(uuid())
+  email        String   @unique
+  subscribedAt DateTime @default(now()) @map("subscribed_at")
+  isActive     Boolean  @default(true) @map("is_active")
+
+  @@index([email])
+  @@map("newsletter_subscribers")
+}
