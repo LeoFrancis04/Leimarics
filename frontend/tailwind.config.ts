@@ -9,29 +9,31 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
+        // Updated: High-Contrast Coral (Red/Pink)
         coral: {
-          50: '#fff1f2',
-          100: '#ffe4e6',
-          200: '#fecdd3',
-          300: '#fda4af',
-          400: '#fb7185',
-          500: '#f43f5e',
-          600: '#e11d48',
-          700: '#be123c',
-          800: '#9f1239',
-          900: '#881337',
+          50: '#fff5f5',
+          100: '#ffe3e3',
+          200: '#ffc9c9',
+          300: '#ffa8a8',
+          400: '#ff8787',
+          500: '#ff6b6b', // Main button color
+          600: '#fa5252',
+          700: '#f03e3e',
+          800: '#e03131',
+          900: '#c92a2a',
         },
+        // Updated: Deep Midnight Navy (Fixes the "too light" issue)
         navy: {
-          50: '#f0f9ff',
-          100: '#e0f2fe',
-          200: '#bae6fd',
-          300: '#7dd3fc',
-          400: '#38bdf8',
-          500: '#0ea5e9',
-          600: '#0284c7',
-          700: '#0369a1',
-          800: '#075985',
-          900: '#0c4a6e',
+          50: '#f0f4f8',
+          100: '#d9e2ec',
+          200: '#bcccdc',
+          300: '#9fb3c8',
+          400: '#829ab1',
+          500: '#627d98',
+          600: '#486581',
+          700: '#334e68',
+          800: '#243b53', 
+          900: '#102a43', // Deep dark background
         },
       },
       fontFamily: {
