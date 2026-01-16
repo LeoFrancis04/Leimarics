@@ -4,6 +4,7 @@ import Portfolio from '@/components/sections/Portfolio'
 import About from '@/components/sections/About'
 import Process from '@/components/sections/Process'
 import Testimonials from '@/components/sections/Testimonials'
+import Newsletter from '@/components/sections/Newsletter'  // ADD THIS
 import Contact from '@/components/sections/Contact'
 import FAQ from '@/components/sections/FAQ'
 
@@ -16,6 +17,7 @@ export default function Home() {
       <About />
       <Process />
       <Testimonials limit={3} />
+      <Newsletter />  
       <Contact />
       <FAQ />
     </>
