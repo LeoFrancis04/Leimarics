@@ -8,24 +8,69 @@ import { Button } from '@/components/ui/Button'
 import { Phone, Mail, MapPin, Clock, Send } from 'lucide-react'
 
 export default function Contact() {
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    phone: '',
+    projectType: '',
+    message: ''
+  })
   const [loading, setLoading] = useState(false)
   const [success, setSuccess] = useState(false)
+  const [error, setError] = useState('')
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     setLoading(true)
-    
-    // Simulate form submission
-    await new Promise(resolve => setTimeout(resolve, 2000))
-    
-    setLoading(false)
-    setSuccess(true)
-    
-    // Reset form
-    setTimeout(() => {
-      setSuccess(false)
-      ;(e.target as HTMLFormElement).reset()
-    }, 3000)
+    setError('')
+    setSuccess(false)
+
+    console.log('Submitting form data:', formData) // Debug log
+    console.log('API URL:', process.env.NEXT_PUBLIC_API_URL) // Debug log
+
+    try {
+      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/contact`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData)
+      })
+
+      console.log('Response status:', response.status) // Debug log
+      const data = await response.json()
+      console.log('Response data:', data) // Debug log
+
+      if (data.success) {
+        setSuccess(true)
+        setFormData({
+          name: '',
+          email: '',
+          phone: '',
+          projectType: '',
+          message: ''
+        })
+        
+        // Reset success message after 5 seconds
+        setTimeout(() => {
+          setSuccess(false)
+        }, 5000)
+      } else {
+        setError(data.error || 'Failed to send message')
+      }
+    } catch (err) {
+      console.error('Form submission error:', err)
+      setError('Network error. Please check if backend is running.')
+    } finally {
+      setLoading(false)
+    }
+  }
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value
+    })
   }
 
   return (
@@ -43,8 +88,7 @@ export default function Contact() {
             Ready to Transform Your Online Presence?
           </h2>
           <p className="text-xl text-gray-300 max-w-2xl mx-auto">
-            Ready to transform your online presence? Get in touch and let&apos;s discuss how 
-            we can help your business grow.
+            Get in touch and let&apos;s discuss how we can help your business grow.
           </p>
         </motion.div>
 
@@ -60,8 +104,7 @@ export default function Contact() {
             <div>
               <h3 className="text-2xl font-bold text-white mb-6">Contact Information</h3>
               <p className="text-gray-300 leading-relaxed mb-8">
-                Fill out the form and we&apos;ll get back to you within 24 hours. 
-                Or reach out directly using the information below.
+                Fill out the form and we&apos;ll get back to you within 24 hours.
               </p>
             </div>
 
@@ -128,7 +171,7 @@ export default function Contact() {
             <div className="mt-8 p-6 bg-white/5 rounded-2xl border border-white/10">
               <p className="text-sm text-gray-300">
                 ⚡ <span className="font-semibold text-white">Quick Response:</span> We respond to all inquiries 
-                within 4 hours during business days. Your time is valuable, and we respect that.
+                within 4 hours during business days.
               </p>
             </div>
           </motion.div>
@@ -145,6 +188,9 @@ export default function Contact() {
                 <Input
                   label="Your Name"
                   type="text"
+                  name="name"
+                  value={formData.name}
+                  onChange={handleChange}
                   placeholder="John Doe"
                   required
                 />
@@ -152,6 +198,9 @@ export default function Contact() {
                 <Input
                   label="Email Address"
                   type="email"
+                  name="email"
+                  value={formData.email}
+                  onChange={handleChange}
                   placeholder="john@example.com"
                   required
                 />
@@ -159,25 +208,54 @@ export default function Contact() {
                 <Input
                   label="Phone Number"
                   type="tel"
+                  name="phone"
+                  value={formData.phone}
+                  onChange={handleChange}
                   placeholder="+91 98765 43210"
                   required
                 />
 
-                <Select label="Project Type" required>
-                  <option value="">Select a service</option>
-                  <option value="basic">Basic Website</option>
-                  <option value="business">Business Website</option>
-                  <option value="ecommerce">E-commerce</option>
-                  <option value="maintenance">Website Maintenance</option>
-                  <option value="other">Other</option>
-                </Select>
+                <div className="w-full">
+                  <label className="block text-sm font-semibold text-gray-700 mb-2">
+                    Project Type<span className="text-red-500 ml-1">*</span>
+                  </label>
+                  <select
+                    name="projectType"
+                    value={formData.projectType}
+                    onChange={handleChange}
+                    required
+                    className="flex h-12 w-full rounded-xl border border-gray-300 bg-white px-4 py-3 text-base transition-all focus:outline-none focus:ring-2 focus:ring-coral-500 focus:border-transparent"
+                  >
+                    <option value="">Select a service</option>
+                    <option value="basic">Basic Website</option>
+                    <option value="business">Business Website</option>
+                    <option value="ecommerce">E-commerce</option>
+                    <option value="maintenance">Website Maintenance</option>
+                    <option value="other">Other</option>
+                  </select>
+                </div>
 
                 <Textarea
                   label="Tell Us About Your Project"
+                  name="message"
+                  value={formData.message}
+                  onChange={handleChange}
                   placeholder="Describe your requirements, goals, and any specific features you need..."
                   rows={5}
                   required
                 />
+
+                {error && (
+                  <div className="p-4 bg-red-50 border border-red-200 rounded-xl text-red-700">
+                    {error}
+                  </div>
+                )}
+
+                {success && (
+                  <div className="p-4 bg-green-50 border border-green-200 rounded-xl text-green-700">
+                    ✓ Thank you! We&apos;ll get back to you within 24 hours.
+                  </div>
+                )}
 
                 <Button
                   type="submit"
@@ -197,12 +275,6 @@ export default function Contact() {
                     </>
                   )}
                 </Button>
-
-                {success && (
-                  <p className="text-green-600 text-center font-semibold">
-                    Thank you! We&apos;ll get back to you soon.
-                  </p>
-                )}
               </div>
             </form>
           </motion.div>
