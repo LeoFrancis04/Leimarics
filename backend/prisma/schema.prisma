@@ -2,12 +2,14 @@
 
 
 generator client {
-  provider = "prisma-client"
-  output   = "../src/generated/prisma"
+  provider = "prisma-client-js" // when using default -js
+  engineType = "library"
+  // output   = "../src/generated/prisma" // if commented This defaults to node_modules
 }
 
 datasource db {
   provider = "postgresql"
+  url      = env("DATABASE_URL")
 }
 
 model ContactSubmission {
