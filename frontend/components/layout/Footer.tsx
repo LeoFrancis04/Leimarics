@@ -1,8 +1,53 @@
+'use client'
+
+import { useState } from 'react'
 import Link from 'next/link'
-import { Facebook, Twitter, Instagram, Linkedin, Mail, Phone, MapPin } from 'lucide-react'
+import { Facebook, Twitter, Instagram, Linkedin, Mail, Phone, MapPin, Send } from 'lucide-react'
 
 export default function Footer() {
   const currentYear = new Date().getFullYear()
+  
+  // Newsletter state (if using footer newsletter)
+  const [newsletterEmail, setNewsletterEmail] = useState('')
+  const [newsletterLoading, setNewsletterLoading] = useState(false)
+  const [newsletterSuccess, setNewsletterSuccess] = useState(false)
+  const [newsletterError, setNewsletterError] = useState('')
+
+  const handleNewsletterSubmit = async (e: React.FormEvent) => {
+    e.preventDefault()
+    setNewsletterLoading(true)
+    setNewsletterError('')
+
+    try {
+      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/newsletter/subscribe`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email: newsletterEmail }),
+      })
+
+      const data = await response.json()
+
+      if (data.success) {
+        setNewsletterSuccess(true)
+        setNewsletterEmail('')
+        setTimeout(() => setNewsletterSuccess(false), 5000)
+      } else {
+        setNewsletterError(data.error || 'Failed to subscribe')
+      }
+    } catch (err) {
+      setNewsletterError('Network error')
+    } finally {
+      setNewsletterLoading(false)
+    }
+  }
+
+  // Social media links - UPDATE THESE WITH YOUR REAL LINKS LATER
+  const socialLinks = {
+    facebook: 'https://www.facebook.com', // Replace with: https://www.facebook.com/serwebz
+    twitter: 'https://www.twitter.com',    // Replace with: https://www.twitter.com/serwebz
+    instagram: 'https://www.instagram.com', // Replace with: https://www.instagram.com/serwebz
+    linkedin: 'https://www.linkedin.com',   // Replace with: https://www.linkedin.com/company/serwebz
+  }
 
   return (
     <footer className="bg-gray-900 text-white">
@@ -17,17 +62,43 @@ export default function Footer() {
             <p className="text-gray-400 mb-6 leading-relaxed">
               Crafting Digital Success. We build modern, high-performing websites that drive real results for growing businesses.
             </p>
+            
+            {/* Social Media Links - NOW WORKING! */}
             <div className="flex gap-4">
-              <a href="#" className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-coral-500 transition-colors">
+              <a 
+                href={socialLinks.facebook}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-coral-500 transition-colors"
+                aria-label="Facebook"
+              >
                 <Facebook className="w-5 h-5" />
               </a>
-              <a href="#" className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-coral-500 transition-colors">
+              <a 
+                href={socialLinks.twitter}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-coral-500 transition-colors"
+                aria-label="Twitter"
+              >
                 <Twitter className="w-5 h-5" />
               </a>
-              <a href="#" className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-coral-500 transition-colors">
+              <a 
+                href={socialLinks.instagram}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-coral-500 transition-colors"
+                aria-label="Instagram"
+              >
                 <Instagram className="w-5 h-5" />
               </a>
-              <a href="#" className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-coral-500 transition-colors">
+              <a 
+                href={socialLinks.linkedin}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-coral-500 transition-colors"
+                aria-label="LinkedIn"
+              >
                 <Linkedin className="w-5 h-5" />
               </a>
             </div>
@@ -45,15 +116,35 @@ export default function Footer() {
             </ul>
           </div>
 
-          {/* Services */}
+          {/* Services - NOW CLICKABLE! */}
           <div>
             <h4 className="font-semibold text-lg mb-4">Services</h4>
-            <ul className="space-y-3 text-gray-400">
-              <li>Website Development</li>
-              <li>E-commerce Solutions</li>
-              <li>UI/UX Design</li>
-              <li>Website Maintenance</li>
-              <li>SEO Optimization</li>
+            <ul className="space-y-3">
+              <li>
+                <Link href="/services/website-development" className="text-gray-400 hover:text-coral-500 transition-colors">
+                  Website Development
+                </Link>
+              </li>
+              <li>
+                <Link href="/services/ecommerce" className="text-gray-400 hover:text-coral-500 transition-colors">
+                  E-commerce Solutions
+                </Link>
+              </li>
+              <li>
+                <Link href="/services/ui-ux-design" className="text-gray-400 hover:text-coral-500 transition-colors">
+                  UI/UX Design
+                </Link>
+              </li>
+              <li>
+                <Link href="/services/maintenance" className="text-gray-400 hover:text-coral-500 transition-colors">
+                  Website Maintenance
+                </Link>
+              </li>
+              <li>
+                <Link href="/services/seo" className="text-gray-400 hover:text-coral-500 transition-colors">
+                  SEO Optimization
+                </Link>
+              </li>
             </ul>
           </div>
 
