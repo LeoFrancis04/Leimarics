@@ -73,7 +73,7 @@ export default function CoastalCafePage() {
     },
     
     timeline: '2 weeks',
-    liveUrl: 'https://coastalcafe-demo.vercel.app', // Optional demo link
+    liveUrl: 'https://coastalcafe-demo.vercel.app', // demo link
   }
 
   return <PortfolioDetailTemplate project={project} />
