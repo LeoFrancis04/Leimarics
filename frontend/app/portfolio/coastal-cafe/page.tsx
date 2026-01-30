@@ -2,7 +2,7 @@ import PortfolioDetailTemplate from '@/components/templates/PortfolioDetailTempl
 import { TrendingUp, Clock, Users } from 'lucide-react'
 
 export const metadata = {
-  title: 'Coastal Café Website - Portfolio | SerWebz',
+  title: 'Coastal Café Website - Portfolio | Leimarics',
   description: 'Modern restaurant website with online reservations and dynamic menu system.',
 }
 
@@ -66,7 +66,7 @@ export default function CoastalCafePage() {
     },
     
     testimonial: {
-      quote: 'Working with SerWebz was a game-changer for our restaurant. Our online bookings increased by 40% within the first month. The website is beautiful, fast, and exactly what we needed!',
+      quote: 'Working with Leimarics was a game-changer for our restaurant. Our online bookings increased by 40% within the first month. The website is beautiful, fast, and exactly what we needed!',
       author: 'Priya Reddy',
       role: 'Owner',
       company: 'Coastal Café',

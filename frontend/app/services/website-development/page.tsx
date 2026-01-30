@@ -2,7 +2,7 @@ import ServiceTemplate from '@/components/templates/ServiceTemplate'
 import { Globe } from 'lucide-react'
 
 export const metadata = {
-  title: 'Website Development Services - SerWebz',
+  title: 'Website Development Services - Leimarics',
   description: 'Professional custom website development services for businesses in India.',
 }
 

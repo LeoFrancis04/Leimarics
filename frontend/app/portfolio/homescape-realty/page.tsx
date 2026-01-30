@@ -2,7 +2,7 @@ import PortfolioDetailTemplate from '@/components/templates/PortfolioDetailTempl
 import { TrendingUp, Clock, Home } from 'lucide-react'
 
 export const metadata = {
-  title: 'HomeScape Realty - Portfolio | SerWebz',
+  title: 'HomeScape Realty - Portfolio | Leimarics',
   description: 'Property listings platform with advanced search and virtual property tours.',
 }
 

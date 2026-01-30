@@ -46,7 +46,7 @@ export default function FAQ() {
             Frequently Asked Questions
           </h2>
           <p className="text-gray-600">
-            Everything you need to know about working with SerWebz.
+            Everything you need to know about working with Leimarics.
           </p>
         </motion.div>
 

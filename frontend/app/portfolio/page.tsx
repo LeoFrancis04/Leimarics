@@ -3,7 +3,7 @@ import Testimonials from '@/components/sections/Testimonials'
 import Contact from '@/components/sections/Contact'
 
 export const metadata = {
-  title: 'Our Portfolio - SerWebz',
+  title: 'Our Portfolio - Leimarics',
   description: 'Explore our portfolio of successful web development projects across different industries.',
 }
 

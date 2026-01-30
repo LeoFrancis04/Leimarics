@@ -5,7 +5,7 @@ import FAQ from '@/components/sections/FAQ'
 import Contact from '@/components/sections/Contact'
 
 export const metadata = {
-  title: 'Our Services - SerWebz',
+  title: 'Our Services - Leimarics',
   description: 'Professional web development services including website design, e-commerce, and maintenance.',
 }
 

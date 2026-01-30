@@ -2,7 +2,7 @@ import PortfolioDetailTemplate from '@/components/templates/PortfolioDetailTempl
 import { TrendingUp, Clock, MapPin } from 'lucide-react'
 
 export const metadata = {
-  title: 'Adventure Tours Platform - Portfolio | SerWebz',
+  title: 'Adventure Tours Platform - Portfolio | Leimarics',
   description: 'Comprehensive tour operator website with booking system and package management.',
 }
 

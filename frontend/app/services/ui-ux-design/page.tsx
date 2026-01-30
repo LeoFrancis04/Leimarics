@@ -2,7 +2,7 @@ import ServiceTemplate from '@/components/templates/ServiceTemplate'
 import { Palette } from 'lucide-react'
 
 export const metadata = {
-  title: 'UI/UX Design Services - SerWebz',
+  title: 'UI/UX Design Services - Leimarics',
   description: 'Professional user interface and user experience design for websites and apps.',
 }
 

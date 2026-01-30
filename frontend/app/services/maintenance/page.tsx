@@ -2,7 +2,7 @@ import ServiceTemplate from '@/components/templates/ServiceTemplate'
 import { Settings } from 'lucide-react'
 
 export const metadata = {
-  title: 'Website Maintenance Services - SerWebz',
+  title: 'Website Maintenance Services - Leimarics',
   description: 'Keep your website secure, fast, and up-to-date with our maintenance services.',
 }
 

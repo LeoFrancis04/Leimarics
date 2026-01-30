@@ -2,7 +2,7 @@ import PortfolioDetailTemplate from '@/components/templates/PortfolioDetailTempl
 import { TrendingUp, Clock, Star } from 'lucide-react'
 
 export const metadata = {
-  title: 'Sunset Villa Resort - Portfolio | SerWebz',
+  title: 'Sunset Villa Resort - Portfolio | Leimarics',
   description: 'Elegant boutique hotel website with direct booking integration and virtual tours.',
 }
 

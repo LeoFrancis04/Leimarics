@@ -2,7 +2,7 @@ import ServiceTemplate from '@/components/templates/ServiceTemplate'
 import { TrendingUp } from 'lucide-react'
 
 export const metadata = {
-  title: 'SEO Optimization Services - SerWebz',
+  title: 'SEO Optimization Services - Leimarics',
   description: 'Improve your Google rankings and get more organic traffic with professional SEO.',
 }
 

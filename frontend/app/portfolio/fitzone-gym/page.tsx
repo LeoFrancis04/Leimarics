@@ -2,7 +2,7 @@ import PortfolioDetailTemplate from '@/components/templates/PortfolioDetailTempl
 import { TrendingUp, Clock, Users } from 'lucide-react'
 
 export const metadata = {
-  title: 'FitZone Gym Website - Portfolio | SerWebz',
+  title: 'FitZone Gym Website - Portfolio | Leimarics',
   description: 'Modern fitness center website with class schedules and membership management.',
 }
 

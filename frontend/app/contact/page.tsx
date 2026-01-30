@@ -2,8 +2,8 @@ import Contact from '@/components/sections/Contact'
 import FAQ from '@/components/sections/FAQ'
 
 export const metadata = {
-  title: 'Contact Us - SerWebz',
-  description: 'Get in touch with SerWebz for your web development needs. We reply within 24 hours.',
+  title: 'Contact Us - Leimarics',
+  description: 'Get in touch with Leimarics for your web development needs. We reply within 24 hours.',
 }
 
 export default function ContactPage() {

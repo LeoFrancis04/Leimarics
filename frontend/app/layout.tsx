@@ -17,31 +17,37 @@ const sora = Sora({
 })
 
 export const metadata: Metadata = {
-  title: 'SerWebz - Crafting Digital Success',
-  description: 'Professional web development services. We build modern, high-performing websites that drive real results.',
-  keywords: 'web development, website design, SerWebz, business websites, professional websites',
+  metadataBase: new URL('https://leimarics.com'),
+  title: 'Leimarics - For What\'s Next',
+  description: 'Where Ambition Meets Execution. We architect world-class digital solutions for businesses ready to lead their markets.',
+  keywords: 'web development, digital solutions, Leimarics, business websites, professional websites, global scale',
   
-  // Add these for favicon
   icons: {
     icon: '/favicon.ico',
-    apple: '/apple-touch-icon.png',
+    apple: '/apple-icon.png',
   },
   
-  // Open Graph for social sharing
   openGraph: {
-    title: 'SerWebz - Crafting Digital Success',
-    description: 'Professional web development services for growing businesses.',
-    url: 'https://serwebz.com',
-    siteName: 'SerWebz',
+    title: 'Leimarics - For What\'s Next',
+    description: 'Where Ambition Meets Execution. World-class digital solutions for global brands.',
+    url: 'https://leimarics.com',
+    siteName: 'Leimarics',
     images: [
       {
-        url: '/SerWebs-og-image.png', // Create a 1200x630 image
+        url: '/Leimarics-og-image.png',
         width: 1200,
         height: 630,
       },
     ],
-    locale: 'en_IN',
+    locale: 'en_US',
     type: 'website',
+  },
+  
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Leimarics - For What\'s Next',
+    description: 'Where Ambition Meets Execution.',
+    images: ['/og-image.png'],
   },
 }
 

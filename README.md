@@ -1,10 +1,10 @@
-# 🌐 SerWebz - Crafting Digital Success
+# 🌐 Leimarics - Crafting Digital Success
 
 > Professional web development services for growing businesses. Modern, high-performing websites that drive real results.
 
 **Tagline:** *We Build, You Grow* 🚀
 
-![SerWebz](https://img.shields.io/badge/SerWebz-Crafting_Digital_Success-FF6B9D?style=for-the-badge)
+![Leimarics](https://img.shields.io/badge/Leimarics-Crafting_Digital_Success-FF6B9D?style=for-the-badge)
 ![Next.js](https://img.shields.io/badge/Next.js-14-black?style=for-the-badge&logo=next.js)
 ![TypeScript](https://img.shields.io/badge/TypeScript-5.0-blue?style=for-the-badge&logo=typescript)
 ![License](https://img.shields.io/badge/License-MIT-green?style=for-the-badge)
@@ -31,7 +31,7 @@
 
 ## 🎯 About
 
-SerWebz is a modern web development agency website built with cutting-edge technologies. This project showcases:
+Leimarics is a modern web development agency website built with cutting-edge technologies. This project showcases:
 
 - **Modern Design:** Clean, professional UI with smooth animations
 - **Full-Stack:** Next.js 14 frontend + Express.js backend
@@ -40,7 +40,7 @@ SerWebz is a modern web development agency website built with cutting-edge techn
 - **Type Safety:** TypeScript throughout
 - **Responsive:** Mobile-first design approach
 
-**Live Demo:** [serwebz.com](https://serwebz.com) *(coming soon)*
+**Live Demo:** [Leimarics.com](https://Leimarics.com) *(coming soon)*
 
 ---
 
@@ -142,8 +142,8 @@ Before you begin, ensure you have:
 
 ### 1. Clone Repository
 ```bash
-git clone https://github.com/trailblazer04/serwebz.git
-cd serwebz
+git clone https://github.com/trailblazer04/Leimarics.git
+cd Leimarics
 ```
 
 ### 2. Install Dependencies
@@ -200,7 +200,7 @@ Navigate to: **http://localhost:3000**
 
 ## 📁 Project Structure
 ```
-serwebz/
+Leimarics/
 ├── frontend/                 # Next.js 14 Application
 │   ├── app/
 │   │   ├── layout.tsx       # Root layout (Navbar + Footer)
@@ -290,7 +290,7 @@ SMTP_PORT=587
 SMTP_SECURE=false
 SMTP_USER=your_email@gmail.com
 SMTP_PASS=your_app_password
-SMTP_FROM="SerWebz <your_email@gmail.com>"
+SMTP_FROM="Leimarics <your_email@gmail.com>"
 NOTIFICATION_EMAIL=leofrancis6988@gmail.com
 ```
 
@@ -298,13 +298,13 @@ NOTIFICATION_EMAIL=leofrancis6988@gmail.com
 
 #### Supabase (Database)
 1. Go to [supabase.com/dashboard](https://supabase.com/dashboard)
-2. Create new project: "serwebz"
+2. Create new project: "Leimarics"
 3. Settings → Database → Copy connection string
 4. Settings → API → Copy URL and keys
 
 #### Contentful (CMS)
 1. Go to [contentful.com](https://contentful.com)
-2. Create new space: "SerWebz"
+2. Create new space: "Leimarics"
 3. Settings → API keys → Add API key
 4. Copy Space ID and Delivery Token
 
@@ -446,7 +446,7 @@ PORT=3001 pnpm dev
 
 ### Still Stuck?
 
-1. Check [GitHub Issues](https://github.com/yourusername/serwebz/issues)
+1. Check [GitHub Issues](https://github.com/yourusername/Leimarics/issues)
 2. Read [documentation](docs/)
 3. Contact: leofrancis6988@gmail.com
 
@@ -478,7 +478,7 @@ This project is licensed under the **MIT License**.
 ```
 MIT License
 
-Copyright (c) 2026 SerWebz
+Copyright (c) 2026 Leimarics
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -503,9 +503,9 @@ SOFTWARE.
 
 ## 📞 Contact
 
-**SerWebz** - Crafting Digital Success
+**Leimarics** - Crafting Digital Success
 
-- **Website:** [serwebz.com](https://serwebz.com) *(coming soon)*
+- **Website:** [Leimarics.com](https://Leimarics.com) *(coming soon)*
 - **Email:** leofrancis6988@gmail.com
 - **Phone:** +91 7499216988
 - **Location:** Seraulim, Goa 403708, India
@@ -530,19 +530,19 @@ SOFTWARE.
 
 ## 📊 Project Stats
 
-![GitHub Stars](https://img.shields.io/github/stars/yourusername/serwebz?style=social)
-![GitHub Forks](https://img.shields.io/github/forks/yourusername/serwebz?style=social)
-![GitHub Issues](https://img.shields.io/github/issues/yourusername/serwebz)
-![Last Commit](https://img.shields.io/github/last-commit/yourusername/serwebz)
+![GitHub Stars](https://img.shields.io/github/stars/yourusername/Leimarics?style=social)
+![GitHub Forks](https://img.shields.io/github/forks/yourusername/Leimarics?style=social)
+![GitHub Issues](https://img.shields.io/github/issues/yourusername/Leimarics)
+![Last Commit](https://img.shields.io/github/last-commit/yourusername/Leimarics)
 
 ---
 
 <div align="center">
 
-**Made with ❤️ by SerWebz**
+**Made with ❤️ by Leimarics**
 
 *We Build, You Grow* 🚀
 
-[⬆ Back to Top](#-serwebz---crafting-digital-success)
+[⬆ Back to Top](#-Leimarics---crafting-digital-success)
 
 </div>

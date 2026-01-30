@@ -2,7 +2,7 @@ import ServiceTemplate from '@/components/templates/ServiceTemplate'
 import { ShoppingCart } from 'lucide-react'
 
 export const metadata = {
-  title: 'E-commerce Solutions - SerWebz',
+  title: 'E-commerce Solutions - Leimarics',
   description: 'Complete online store setup with payment gateway integration.',
 }
 

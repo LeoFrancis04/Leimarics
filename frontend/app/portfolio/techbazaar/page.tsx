@@ -2,7 +2,7 @@ import PortfolioDetailTemplate from '@/components/templates/PortfolioDetailTempl
 import { TrendingUp, Clock, ShoppingCart } from 'lucide-react'
 
 export const metadata = {
-  title: 'TechBazaar E-Store - Portfolio | SerWebz',
+  title: 'TechBazaar E-Store - Portfolio | Leimarics',
   description: 'Full-featured electronics e-commerce platform with payment gateway and inventory.',
 }
 

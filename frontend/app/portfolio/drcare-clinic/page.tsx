@@ -2,7 +2,7 @@ import PortfolioDetailTemplate from '@/components/templates/PortfolioDetailTempl
 import { TrendingUp, Clock, Calendar } from 'lucide-react'
 
 export const metadata = {
-  title: 'Dr. Care Clinic - Portfolio | SerWebz',
+  title: 'Dr. Care Clinic - Portfolio | Leimarics',
   description: 'Medical clinic website with online appointment booking and patient portal.',
 }
 

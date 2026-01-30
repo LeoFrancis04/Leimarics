@@ -59,7 +59,7 @@ export default function Process() {
           </h2>
           <p className="text-xl text-gray-600 max-w-2xl mx-auto">
             A simple, transparent process designed to deliver exceptional results. 
-            Here is what you can expect when working with SerWebz.
+            Here is what you can expect when working with Leimarics.
           </p>
         </motion.div>
 

@@ -25,25 +25,25 @@ export default function Navbar() {
     <nav className="fixed top-0 w-full bg-white/95 backdrop-blur-lg z-50 border-b border-gray-100">
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-between h-20">
-          {/* Logo - Clickable to Home */}
+          {/* Logo - Clickable to Home - UPDATED */}
           <Link href="/" className="flex items-center gap-3 hover:opacity-80 transition-opacity">
             {/* Option 1: Use actual logo image */}
-            <div className="relative w-40 h-10">
+            <div className="relative w-48 h-12">
               <Image
-                src="/SerWebz-log.png"
-                alt="SerWebz - Crafting Digital Success"
+                src="/Leimarics-log.png"
+                alt="Leimarics - For What's Next"
                 fill
                 className="object-contain"
                 priority
               />
             </div>
-            
-            {/* Option 2: If you don't have logo yet, use styled text (REMOVE IF YOU HAVE LOGO) */}
+          </Link>
+
+          {/* Option 2: If you don't have logo yet, use styled text (REMOVE IF YOU HAVE LOGO) */}
             {/* <div className="text-2xl font-bold">
               <span className="text-navy-900">Ser</span>
               <span className="bg-gradient-to-r from-coral-500 to-pink-500 bg-clip-text text-transparent">Webz</span>
             </div> */}
-          </Link>
 
           {/* Desktop Navigation */}
           <ul className="hidden lg:flex items-center gap-8">

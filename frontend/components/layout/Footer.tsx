@@ -2,12 +2,13 @@
 
 import { useState } from 'react'
 import Link from 'next/link'
-import { Facebook, Twitter, Instagram, Linkedin, Mail, Phone, MapPin, Send } from 'lucide-react'
+import Image from 'next/image'
+import { Facebook, Twitter, Instagram, Linkedin, Mail, Phone, MapPin } from 'lucide-react'
 
 export default function Footer() {
   const currentYear = new Date().getFullYear()
   
-  // Newsletter state (if using footer newsletter)
+  // Newsletter state 
   const [newsletterEmail, setNewsletterEmail] = useState('')
   const [newsletterLoading, setNewsletterLoading] = useState(false)
   const [newsletterSuccess, setNewsletterSuccess] = useState(false)
@@ -41,29 +42,37 @@ export default function Footer() {
     }
   }
 
-  // Social media links - UPDATE THESE WITH YOUR REAL LINKS LATER
+  // UPDATED: Social media links
   const socialLinks = {
-    facebook: 'https://www.facebook.com', // Replace with: https://www.facebook.com/serwebz
-    twitter: 'https://www.twitter.com',    // Replace with: https://www.twitter.com/serwebz
-    instagram: 'https://www.instagram.com', // Replace with: https://www.instagram.com/serwebz
-    linkedin: 'https://www.linkedin.com',   // Replace with: https://www.linkedin.com/company/serwebz
+    facebook: 'https://www.facebook.com/leimarics',
+    twitter: 'https://www.twitter.com/leimarics',
+    instagram: 'https://www.instagram.com/leimarics',
+    linkedin: 'https://www.linkedin.com/company/leimarics',
   }
 
   return (
     <footer className="bg-gray-900 text-white">
       <div className="container mx-auto px-4 py-16">
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-12">
-          {/* About Column */}
+          {/* About Column - UPDATED */}
           <div>
-            <div className="text-2xl font-bold mb-4">
-              <span className="text-white">Ser</span>
-              <span className="bg-gradient-to-r from-coral-500 to-pink-500 bg-clip-text text-transparent">Webz</span>
+            <div className="mb-4">
+              <Image
+                src="/Leimarics-log.png"
+                alt="Leimarics"
+                width={180}
+                height={45}
+                className="object-contain" //FIX: Removed 'brightness-0 invert' and added 'object-contain'
+              />
             </div>
-            <p className="text-gray-400 mb-6 leading-relaxed">
-              Crafting Digital Success. We build modern, high-performing websites that drive real results for growing businesses.
+            <p className="text-gray-400 mb-4 leading-relaxed">
+              For What&apos;s Next.
+            </p>
+            <p className="text-gray-400 mb-6 leading-relaxed text-sm">
+              Where Ambition Meets Execution. We architect world-class digital solutions for brands that are ready to lead.
             </p>
             
-            {/* Social Media Links - NOW WORKING! */}
+            {/* Social Media Links */}
             <div className="flex gap-4">
               <a 
                 href={socialLinks.facebook}
@@ -116,7 +125,7 @@ export default function Footer() {
             </ul>
           </div>
 
-          {/* Services - NOW CLICKABLE! */}
+          {/* Services */}
           <div>
             <h4 className="font-semibold text-lg mb-4">Services</h4>
             <ul className="space-y-3">
@@ -163,8 +172,8 @@ export default function Footer() {
               <li className="flex items-start gap-3">
                 <Mail className="w-5 h-5 text-coral-500 flex-shrink-0 mt-0.5" />
                 <div>
-                  <a href="mailto:leofrancis6988@gmail.com" className="hover:text-coral-500 transition-colors break-all">
-                    leofrancis6988@gmail.com
+                  <a href="mailto:contact@leimarics.com" className="hover:text-coral-500 transition-colors break-all">
+                    contact@leimarics.com
                   </a>
                 </div>
               </li>
@@ -176,10 +185,10 @@ export default function Footer() {
           </div>
         </div>
 
-        {/* Bottom Bar */}
+        {/* Bottom Bar - UPDATED */}
         <div className="border-t border-gray-800 mt-12 pt-8 text-center text-gray-400">
-          <p>&copy; {currentYear} SerWebz. All rights reserved. Crafted with care in India.</p>
-          <p className="mt-2 text-sm">We Build, You Grow 🚀</p>
+          <p>&copy; {currentYear} Leimarics. All rights reserved.</p>
+          <p className="mt-2 text-sm">For What&apos;s Next. | Where Ambition Meets Execution.</p>
         </div>
       </div>
     </footer>

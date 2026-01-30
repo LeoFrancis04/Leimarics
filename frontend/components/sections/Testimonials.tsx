@@ -36,7 +36,7 @@ export default function Testimonials({ testimonials = [], limit }: TestimonialsP
         clientRole: 'Owner',
         clientCompany: 'Spice Garden Restaurant',
         rating: 5,
-        testimonialText: "Working with SerWebz was a game-changer for our restaurant. Our online bookings increased by 40% within the first month. The website is beautiful, fast, and exactly what we needed!"
+        testimonialText: "Working with Leimarics was a game-changer for our restaurant. Our online bookings increased by 40% within the first month. The website is beautiful, fast, and exactly what we needed!"
       }
     },
     {
@@ -100,7 +100,7 @@ export default function Testimonials({ testimonials = [], limit }: TestimonialsP
             What Our Clients Say
           </h2>
           <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-            Don&apos;t just take our word for it. Here&apos;s what our satisfied clients have to say about working with SerWebz.
+            Don&apos;t just take our word for it. Here&apos;s what our satisfied clients have to say about working with Leimarics.
           </p>
         </motion.div>
 
