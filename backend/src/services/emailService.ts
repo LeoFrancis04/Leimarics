@@ -108,9 +108,9 @@ class EmailService {
           <div class="container">
             <div class="header">
               <div class="welcome-icon">🎉</div>
-              <h1 style="margin: 0; font-size: 32px;">Welcome to SerWebz!</h1>
+              <h1 style="margin: 0; font-size: 32px;">Welcome to Leimarics!</h1>
               <p style="margin: 10px 0 0 0; font-size: 18px; opacity: 0.9;">
-                Thanks for subscribing to our newsletter
+                For What's Next
               </p>
             </div>
             
@@ -127,16 +127,16 @@ class EmailService {
                 <div class="benefit-item">
                   <div class="benefit-icon">💡</div>
                   <div>
-                    <strong>Web Development Tips</strong><br>
-                    <span style="color: #666;">Practical insights to improve your online presence</span>
+                    <strong>Digital Innovation Insights</strong><br>
+                    <span style="color: #666;">Stay ahead with cutting-edge web development trends</span>
                   </div>
                 </div>
                 
                 <div class="benefit-item">
                   <div class="benefit-icon">📊</div>
                   <div>
-                    <strong>Industry Trends</strong><br>
-                    <span style="color: #666;">Stay ahead with the latest digital marketing strategies</span>
+                    <strong>Business Growth Strategies</strong><br>
+                    <span style="color: #666;">Learn how top brands scale their digital presence</span>
                   </div>
                 </div>
                 
@@ -144,7 +144,7 @@ class EmailService {
                   <div class="benefit-icon">🎁</div>
                   <div>
                     <strong>Exclusive Offers</strong><br>
-                    <span style="color: #666;">Subscriber-only discounts and early access to new services</span>
+                    <span style="color: #666;">Subscriber-only discounts and early access to services</span>
                   </div>
                 </div>
                 
@@ -159,31 +159,31 @@ class EmailService {
               
               <p style="margin-top: 30px;">
                 <strong>In the meantime, why not check out our portfolio?</strong><br>
-                See how we've helped other businesses grow online.
+                See how we've helped other businesses achieve their digital goals.
               </p>
               
               <div style="text-align: center;">
-                <a href="https://serwebz.com/portfolio" class="cta-button">
+                <a href="https://leimarics.com/portfolio" class="cta-button">
                   View Our Portfolio
                 </a>
               </div>
               
               <div class="footer">
                 <p>
-                  <strong>SerWebz - Crafting Digital Success</strong><br>
-                  We Build, You Grow 🚀
+                  <strong>Leimarics - For What's Next</strong><br>
+                  Where Ambition Meets Execution
                 </p>
                 
                 <p style="margin-top: 15px;">
-                  📧 leofrancis6988@gmail.com<br>
+                  📧 contact@leimarics.com<br>
                   📱 +91 7499216988<br>
-                  🌐 <a href="https://serwebz.com" style="color: #667eea;">www.serwebz.com</a>
+                  🌐 <a href="https://leimarics.com" style="color: #667eea;">www.leimarics.com</a>
                 </p>
                 
                 <div class="unsubscribe">
                   <p>
                     Don't want to receive these emails?<br>
-                    <a href="https://serwebz.com/unsubscribe?email=${encodeURIComponent(email)}" 
+                    <a href="https://leimarics.com/unsubscribe?email=${encodeURIComponent(email)}" 
                        style="color: #999;">
                       Unsubscribe
                     </a>
@@ -195,10 +195,10 @@ class EmailService {
         </body>
       </html>
     `
-
+  
     return this.sendEmail({
       to: email,
-      subject: '🎉 Welcome to SerWebz Newsletter!',
+      subject: '🎉 Welcome to Leimarics Newsletter!',
       html,
     })
   }

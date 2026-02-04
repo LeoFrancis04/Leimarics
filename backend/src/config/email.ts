@@ -85,8 +85,8 @@ export const emailTemplates = {
               </div>
               
               <div class="footer">
-                <p><strong>SerWebz Contact Form</strong></p>
-                <p>Respond within 24 hours for best results!</p>
+                <p><strong>Leimarics Contact Form</strong></p>
+                <p>For What's Next | Where Ambition Meets Execution</p>
               </div>
             </div>
           </div>
@@ -96,7 +96,7 @@ export const emailTemplates = {
   }),
 
   contactConfirmation: (name: string) => ({
-    subject: 'Thank you for contacting SerWebz!',
+    subject: 'Thank you for contacting Leimarics!',
     html: `
       <!DOCTYPE html>
       <html>
@@ -127,16 +127,16 @@ export const emailTemplates = {
               <p>In the meantime, feel free to check out our portfolio to see some of our recent work.</p>
               
               <div style="text-align: center;">
-                <a href="https://serwebz.com/portfolio" class="cta-button">View Our Portfolio</a>
+                <a href="https://leimarics.com/portfolio" class="cta-button">View Our Portfolio</a>
               </div>
               
               <hr style="border: none; border-top: 1px solid #ddd; margin: 30px 0;">
               
               <p style="font-size: 14px; color: #666;">
-                <strong>SerWebz - Crafting Digital Success</strong><br>
-                📧 leofrancis6988@gmail.com<br>
+                <strong>Leimarics - For What's Next</strong><br>
+                📧 contact@leimarics.com<br>
                 📱 +91 7499216988<br>
-                🌐 www.serwebz.com
+                🌐 www.leimarics.com
               </p>
             </div>
           </div>
