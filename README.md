@@ -512,8 +512,8 @@ SOFTWARE.
 
 **Developer:** Leo Francis
 
-- **GitHub:** [@leofrancis](https://github.com/leofrancis)
-- **LinkedIn:** [linkedin.com/in/leofrancis](https://linkedin.com/in/leofrancis)
+- **GitHub:** [@leofrancis](https://github.com/LeoFrancis04)
+- **LinkedIn:** [linkedin.com/in/leofrancis](https://www.linkedin.com/in/leo-francis-a1a02b182/)
 
 ---
 
@@ -543,6 +543,6 @@ SOFTWARE.
 
 *Where Ambition Meets Execution* 🚀
 
-[⬆ Back to Top](#-Leimarics---crafting-digital-success)
+[⬆ Back to Top](#🌐-Leimarics---For-What's-Next)
 
 </div>
