@@ -95,7 +95,7 @@ router.get(
   '/status/:email',
   async (req: Request, res: Response, next: NextFunction) => {
     try {
-      const email = req.params.email.toLowerCase().trim()
+      const email = (req.params.email as string).toLowerCase().trim()
 
       // Validate email format
       const emailSchema = z.string().email()
