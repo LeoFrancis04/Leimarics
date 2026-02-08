@@ -15,6 +15,7 @@ dotenv.config()
 
 const app = express()
 app.set('trust proxy', 1); // Trust proxy of Render - Load Balancer
+const PORT = process.env.PORT || 3001
 
 // Middleware
 app.use(helmet())
