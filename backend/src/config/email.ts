@@ -1,5 +1,6 @@
 // backend/src/config/email.ts
 import nodemailer from 'nodemailer'
+import SMTPTransport from 'nodemailer/lib/smtp-transport'; // 1. Import this specific type
 
 // Create transporter
 export const transporter = nodemailer.createTransport({
@@ -13,7 +14,7 @@ export const transporter = nodemailer.createTransport({
   family: 4, // Forces IPv4. Without this, Gmail connection hangs on Render.
   logger: true, // Log every step of the email process to console
   debug: true   // Include SMTP traffic in logs
-})
+}as SMTPTransport.Options); // 2. Add this "as" cast to fix the TS error
 
 // Verify email configuration
 export async function verifyEmailConnection() {
