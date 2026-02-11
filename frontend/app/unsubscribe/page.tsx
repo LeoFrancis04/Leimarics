@@ -1,11 +1,12 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState, Suspense } from 'react'
 import { useSearchParams } from 'next/navigation'
 import { Button } from '@/components/ui/Button'
 import { Input } from '@/components/ui/Input'
 
-export default function UnsubscribePage() {
+// 1. Move the logic into a separate component
+function UnsubscribeForm() {
   const searchParams = useSearchParams()
   const emailFromUrl = searchParams.get('email')
   
@@ -96,5 +97,18 @@ export default function UnsubscribePage() {
         </form>
       </div>
     </div>
+  )
+}
+
+// 2. The main page component exports the form wrapped in Suspense
+export default function UnsubscribePage() {
+  return (
+    <Suspense fallback={
+      <div className="min-h-screen flex items-center justify-center bg-gray-50">
+        <p className="text-gray-500">Loading...</p>
+      </div>
+    }>
+      <UnsubscribeForm />
+    </Suspense>
   )
 }
