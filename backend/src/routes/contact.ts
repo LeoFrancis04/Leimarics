@@ -1,8 +1,13 @@
+// backend/src/routes/contact.ts
 import { Router } from 'express'
 import { validateRequest } from '../middleware/validator'
 import { contactLimiter } from '../middleware/rateLimiter'
-// Import schema and handler from the controller
-import { submitContactForm, getSubmissions, contactSchema } from '../controllers/contactController'
+// ✅ FIX: Import the functions we just fixed in contactController.ts
+import { 
+  submitContactForm, 
+  getSubmissions, 
+  contactSchema 
+} from '../controllers/contactController'
 
 const router = Router()
 

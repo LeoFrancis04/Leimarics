@@ -1,37 +1,63 @@
 // backend/src/config/email.ts
-import nodemailer from 'nodemailer'
-import SMTPTransport from 'nodemailer/lib/smtp-transport'; // 1. Import this specific type
+import * as Brevo from '@getbrevo/brevo'
 
-// Create transporter
-export const transporter = nodemailer.createTransport({
-  host: process.env.SMTP_HOST || 'smtp.gmail.com',
-  port: Number(process.env.SMTP_PORT || 465),
-  secure: process.env.SMTP_SECURE === 'true', // returns true for 465
-  auth: {
-    user: process.env.SMTP_USER,
-    pass: process.env.SMTP_PASS,
-  },
-  family: 4, // Forces IPv4. Without this, Gmail connection hangs on Render.
-  logger: true, // Log every step of the email process to console
-  debug: true   // Include SMTP traffic in logs
-}as SMTPTransport.Options); // 2. Add this "as" cast to fix the TS error
+// --- 1. Brevo Configuration ---
+const apiInstance = new Brevo.TransactionalEmailsApi()
 
-// Verify email configuration
-export async function verifyEmailConnection() {
-  try {
-    console.log('Testing email connection...');
-    await transporter.verify()
-    console.log('✅ Email service connected successfully')
+// FIX: Do not access 'authentications' directly. Use the setApiKey method.
+export function configureBrevo() {
+  if (process.env.BREVO_API_KEY) {
+    apiInstance.setApiKey(Brevo.TransactionalEmailsApiApiKeys.apiKey, process.env.BREVO_API_KEY)
     return true
-  } catch (error) {
-    console.error('❌ Email service connection failed:', error)
-    console.warn('⚠️  Contact form will not send emails. Please configure SMTP settings in .env')
-    return false
+  }
+  console.error('❌ BREVO_API_KEY is missing in environment variables')
+  return false
+}
+
+// Verify email connection
+export async function verifyEmailConnection() {
+  if (configureBrevo()) {
+    console.log('✅ Brevo email service ready')
+    return true
+  }
+  console.warn('⚠️ Brevo API key not configured - emails will not be sent')
+  return false
+}
+
+// --- 2. Universal Send Function ---
+export async function sendEmail(data: {
+  to: string
+  subject: string
+  html: string
+}): Promise<{ success: boolean; id?: string; error?: any }> {
+  // Ensure config is loaded
+  configureBrevo()
+
+  const sendSmtpEmail = new Brevo.SendSmtpEmail()
+
+  // CRITICAL: Using verified Gmail until you buy a domain
+  sendSmtpEmail.sender = {
+    name: 'Leimarics',
+    email: 'leofrancis6988@gmail.com', 
+  }
+
+  sendSmtpEmail.to = [{ email: data.to }]
+  sendSmtpEmail.subject = data.subject
+  sendSmtpEmail.htmlContent = data.html
+
+  try {
+    const response = await apiInstance.sendTransacEmail(sendSmtpEmail)
+    console.log('✅ Email sent via Brevo. Message ID:', response.body.messageId)
+    return { success: true, id: response.body.messageId }
+  } catch (error: any) {
+    console.error('❌ Brevo send error:', error.body || error.message)
+    return { success: false, error: error.body || error.message }
   }
 }
 
-// Email templates 
+// --- 3. Email Templates ---
 export const emailTemplates = {
+  // 1. Admin: Contact Form Notification
   contactNotification: (data: {
     name: string
     email: string
@@ -65,27 +91,22 @@ export const emailTemplates = {
                 <div class="label">👤 Name</div>
                 <div class="value">${data.name}</div>
               </div>
-              
               <div class="field">
                 <div class="label">📧 Email</div>
                 <div class="value"><a href="mailto:${data.email}">${data.email}</a></div>
               </div>
-              
               <div class="field">
                 <div class="label">📱 Phone</div>
                 <div class="value"><a href="tel:${data.phone}">${data.phone}</a></div>
               </div>
-              
               <div class="field">
                 <div class="label">💼 Project Type</div>
                 <div class="value">${data.projectType}</div>
               </div>
-              
               <div class="field">
                 <div class="label">💬 Message</div>
                 <div class="value">${data.message}</div>
               </div>
-              
               <div class="footer">
                 <p><strong>Leimarics Contact Form</strong></p>
                 <p>For What's Next | Where Ambition Meets Execution</p>
@@ -97,6 +118,7 @@ export const emailTemplates = {
     `,
   }),
 
+  // 2. User: Contact Form Confirmation
   contactConfirmation: (name: string) => ({
     subject: 'Thank you for contacting Leimarics!',
     html: `
@@ -118,25 +140,20 @@ export const emailTemplates = {
             </div>
             <div class="content">
               <p>We've received your message and we're excited to learn more about your project!</p>
-              
               <p><strong>What happens next?</strong></p>
               <ul>
                 <li>We'll review your inquiry within 24 hours</li>
                 <li>You'll receive a detailed response via email</li>
                 <li>If needed, we'll schedule a free consultation call</li>
               </ul>
-              
               <p>In the meantime, feel free to check out our portfolio to see some of our recent work.</p>
-              
               <div style="text-align: center;">
                 <a href="https://leimarics.com/portfolio" class="cta-button">View Our Portfolio</a>
               </div>
-              
               <hr style="border: none; border-top: 1px solid #ddd; margin: 30px 0;">
-              
               <p style="font-size: 14px; color: #666;">
                 <strong>Leimarics - For What's Next</strong><br>
-                📧 contact@leimarics.com<br>
+                📧 leofrancis6988@gmail.com<br>
                 📱 +91 7499216988<br>
                 🌐 www.leimarics.com
               </p>
@@ -146,6 +163,239 @@ export const emailTemplates = {
       </html>
     `,
   }),
+
+  // 3. User: Newsletter Welcome
+  newsletterWelcome: (email: string) => ({
+    subject: '🎉 Welcome to Leimarics Newsletter!',
+    html: `
+      <!DOCTYPE html>
+      <html>
+        <head>
+          <style>
+            body { font-family: Arial, sans-serif; line-height: 1.6; color: #333; }
+            .container { max-width: 600px; margin: 0 auto; padding: 20px; }
+            .header { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 40px 30px; border-radius: 10px 10px 0 0; text-align: center; }
+            .content { background: #f9f9f9; padding: 30px; border-radius: 0 0 10px 10px; }
+            .welcome-icon { font-size: 60px; margin-bottom: 10px; }
+            .benefits { background: white; padding: 20px; border-radius: 10px; margin: 20px 0; }
+            .benefit-item { display: flex; align-items: start; margin-bottom: 15px; padding-bottom: 15px; border-bottom: 1px solid #eee; }
+            .benefit-item:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
+            .benefit-icon { background: #667eea; color: white; width: 30px; height: 30px; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-right: 15px; flex-shrink: 0; }
+            .cta-button { display: inline-block; background: #667eea; color: white !important; padding: 15px 40px; text-decoration: none; border-radius: 5px; margin-top: 20px; font-weight: bold; }
+            .footer { text-align: center; margin-top: 30px; padding-top: 20px; border-top: 1px solid #ddd; color: #666; font-size: 14px; }
+            .unsubscribe { color: #999; font-size: 12px; margin-top: 20px; }
+          </style>
+        </head>
+        <body>
+          <div class="container">
+            <div class="header">
+              <div class="welcome-icon">🎉</div>
+              <h1 style="margin: 0; font-size: 32px;">Welcome to Leimarics!</h1>
+              <p style="margin: 10px 0 0 0; font-size: 18px; opacity: 0.9;">For What's Next</p>
+            </div>
+            <div class="content">
+              <p style="font-size: 16px; margin-bottom: 20px;">We're thrilled to have you in our community! 🚀</p>
+              <p>Here's what you can expect from our newsletter:</p>
+              <div class="benefits">
+                <div class="benefit-item">
+                  <div class="benefit-icon">💡</div>
+                  <div><strong>Digital Innovation Insights</strong><br><span style="color: #666;">Stay ahead with cutting-edge trends</span></div>
+                </div>
+                <div class="benefit-item">
+                  <div class="benefit-icon">📊</div>
+                  <div><strong>Business Growth Strategies</strong><br><span style="color: #666;">Learn how top brands scale</span></div>
+                </div>
+                <div class="benefit-item">
+                  <div class="benefit-icon">🎁</div>
+                  <div><strong>Exclusive Offers</strong><br><span style="color: #666;">Subscriber-only discounts</span></div>
+                </div>
+              </div>
+              <div style="text-align: center;">
+                <a href="https://leimarics.com/portfolio" class="cta-button">View Our Portfolio</a>
+              </div>
+              <div class="footer">
+                <p><strong>Leimarics - For What's Next</strong><br>Where Ambition Meets Execution</p>
+                <p style="margin-top: 15px;">📧 leofrancis6988@gmail.com<br>🌐 <a href="https://leimarics.com" style="color: #667eea;">www.leimarics.com</a></p>
+                <div class="unsubscribe">
+                  <p>Don't want to receive these emails?<br><a href="https://leimarics.com/unsubscribe?email=${encodeURIComponent(email)}" style="color: #999;">Unsubscribe</a></p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </body>
+      </html>
+    `
+  }),
+
+  // 4. Admin: New Subscriber Alert
+  newsletterNotification: (email: string) => ({
+    subject: '📢 New Newsletter Subscriber!',
+    html: `
+      <h2>New Subscriber Alert</h2>
+      <p><strong>Email:</strong> ${email}</p>
+      <p>A new user has joined your newsletter list.</p>
+    `,
+  }),
+
+  // 5. Admin: Unsubscribe Alert
+  newsletterUnsubscribe: (email: string) => ({
+    subject: '⚠️ Newsletter Unsubscribe Alert',
+    html: `
+      <h2>Unsubscribe Alert</h2>
+      <p><strong>Email:</strong> ${email}</p>
+      <p>A user has unsubscribed from your newsletter.</p>
+    `,
+  })
 }
 
-export default transporter
+// // backend/src/config/email.ts
+// import nodemailer from 'nodemailer'
+// import SMTPTransport from 'nodemailer/lib/smtp-transport'; // 1. Import this specific type
+
+// // Create transporter
+// export const transporter = nodemailer.createTransport({
+//   host: process.env.SMTP_HOST || 'smtp.gmail.com',
+//   port: Number(process.env.SMTP_PORT || 465),
+//   secure: process.env.SMTP_SECURE === 'true', // returns true for 465
+//   auth: {
+//     user: process.env.SMTP_USER,
+//     pass: process.env.SMTP_PASS,
+//   },
+//   family: 4, // Forces IPv4. Without this, Gmail connection hangs on Render.
+//   logger: true, // Log every step of the email process to console
+//   debug: true   // Include SMTP traffic in logs
+// }as SMTPTransport.Options); // 2. Add this "as" cast to fix the TS error
+
+// // Verify email configuration
+// export async function verifyEmailConnection() {
+//   try {
+//     console.log('Testing email connection...');
+//     await transporter.verify()
+//     console.log('✅ Email service connected successfully')
+//     return true
+//   } catch (error) {
+//     console.error('❌ Email service connection failed:', error)
+//     console.warn('⚠️  Contact form will not send emails. Please configure SMTP settings in .env')
+//     return false
+//   }
+// }
+
+// // Email templates 
+// export const emailTemplates = {
+//   contactNotification: (data: {
+//     name: string
+//     email: string
+//     phone: string
+//     projectType: string
+//     message: string
+//   }) => ({
+//     subject: `New Contact Form Submission - ${data.name}`,
+//     html: `
+//       <!DOCTYPE html>
+//       <html>
+//         <head>
+//           <style>
+//             body { font-family: Arial, sans-serif; line-height: 1.6; color: #333; }
+//             .container { max-width: 600px; margin: 0 auto; padding: 20px; }
+//             .header { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 20px; border-radius: 10px 10px 0 0; }
+//             .content { background: #f9f9f9; padding: 30px; border-radius: 0 0 10px 10px; }
+//             .field { margin-bottom: 20px; }
+//             .label { font-weight: bold; color: #667eea; margin-bottom: 5px; }
+//             .value { background: white; padding: 10px; border-radius: 5px; border-left: 3px solid #667eea; }
+//             .footer { text-align: center; margin-top: 30px; color: #666; font-size: 14px; }
+//           </style>
+//         </head>
+//         <body>
+//           <div class="container">
+//             <div class="header">
+//               <h1 style="margin: 0;">🎉 New Contact Form Submission!</h1>
+//             </div>
+//             <div class="content">
+//               <div class="field">
+//                 <div class="label">👤 Name</div>
+//                 <div class="value">${data.name}</div>
+//               </div>
+              
+//               <div class="field">
+//                 <div class="label">📧 Email</div>
+//                 <div class="value"><a href="mailto:${data.email}">${data.email}</a></div>
+//               </div>
+              
+//               <div class="field">
+//                 <div class="label">📱 Phone</div>
+//                 <div class="value"><a href="tel:${data.phone}">${data.phone}</a></div>
+//               </div>
+              
+//               <div class="field">
+//                 <div class="label">💼 Project Type</div>
+//                 <div class="value">${data.projectType}</div>
+//               </div>
+              
+//               <div class="field">
+//                 <div class="label">💬 Message</div>
+//                 <div class="value">${data.message}</div>
+//               </div>
+              
+//               <div class="footer">
+//                 <p><strong>Leimarics Contact Form</strong></p>
+//                 <p>For What's Next | Where Ambition Meets Execution</p>
+//               </div>
+//             </div>
+//           </div>
+//         </body>
+//       </html>
+//     `,
+//   }),
+
+//   contactConfirmation: (name: string) => ({
+//     subject: 'Thank you for contacting Leimarics!',
+//     html: `
+//       <!DOCTYPE html>
+//       <html>
+//         <head>
+//           <style>
+//             body { font-family: Arial, sans-serif; line-height: 1.6; color: #333; }
+//             .container { max-width: 600px; margin: 0 auto; padding: 20px; }
+//             .header { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 30px; border-radius: 10px 10px 0 0; text-align: center; }
+//             .content { background: #f9f9f9; padding: 30px; border-radius: 0 0 10px 10px; }
+//             .cta-button { display: inline-block; background: #667eea; color: white; padding: 12px 30px; text-decoration: none; border-radius: 5px; margin-top: 20px; }
+//           </style>
+//         </head>
+//         <body>
+//           <div class="container">
+//             <div class="header">
+//               <h1 style="margin: 0;">Thanks for reaching out, ${name}! 🎉</h1>
+//             </div>
+//             <div class="content">
+//               <p>We've received your message and we're excited to learn more about your project!</p>
+              
+//               <p><strong>What happens next?</strong></p>
+//               <ul>
+//                 <li>We'll review your inquiry within 24 hours</li>
+//                 <li>You'll receive a detailed response via email</li>
+//                 <li>If needed, we'll schedule a free consultation call</li>
+//               </ul>
+              
+//               <p>In the meantime, feel free to check out our portfolio to see some of our recent work.</p>
+              
+//               <div style="text-align: center;">
+//                 <a href="https://leimarics.com/portfolio" class="cta-button">View Our Portfolio</a>
+//               </div>
+              
+//               <hr style="border: none; border-top: 1px solid #ddd; margin: 30px 0;">
+              
+//               <p style="font-size: 14px; color: #666;">
+//                 <strong>Leimarics - For What's Next</strong><br>
+//                 📧 contact@leimarics.com<br>
+//                 📱 +91 7499216988<br>
+//                 🌐 www.leimarics.com
+//               </p>
+//             </div>
+//           </div>
+//         </body>
+//       </html>
+//     `,
+//   }),
+// }
+
+// export default transporter
