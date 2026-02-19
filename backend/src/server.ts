@@ -17,12 +17,21 @@ const app = express()
 app.set('trust proxy', 1); // Trust proxy of Render - Load Balancer
 const PORT = process.env.PORT || 3001
 
-// Middleware
+// --- UPDATED MIDDLEWARE ---
 app.use(helmet())
+
+
+// Modified CORS to allow both local development and your live Vercel site
 app.use(cors({
-  origin: process.env.FRONTEND_URL || 'http://localhost:3000',
+  origin: [
+    'http://localhost:3000', 
+    'https://leimarics.vercel.app',
+    process.env.FRONTEND_URL || ''
+  ].filter(Boolean), // Filters out empty strings if FRONTEND_URL isn't set
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
   credentials: true,
 }))
+
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
 
